@@ -102,6 +102,13 @@ doc = {
                 # "index": True,
                 "similarity": "l2_norm"
             },
+            "title_emb": {
+                "type": "dense_vector",
+                "index": True,
+                "dims": 384,
+                # "index": True,
+                "similarity": "l2_norm"
+            },
             "version": {
                 "type": "text",
                 # "index": True,
@@ -116,7 +123,7 @@ doc = {
     }
 }
 
-es.indices.delete(index="paper_emb")
+# es.indices.delete(index="paper_title_emb")
 # if es.indices.exists(index="paper_emb"):
 #     res = es.get(index="paper_emb", id="0704.0001")
 #     print(res)
@@ -124,12 +131,12 @@ es.indices.delete(index="paper_emb")
 # else:
 #     print("索引不存在")
 
-res = es.indices.create(index="paper_emb", body=doc)
+res = es.indices.create(index="paper_title_emb", body=doc)
 print(res)
 # exit()
     
 
-all_data = load_dataset("/home/lc/code/database_papers/arxiv_dataset", data_dir="/home/lc/Arxiv/", verification_mode=VerificationMode.NO_CHECKS)
+all_data = load_dataset("/home/lc/code/database_papers/arxiv_dataset", data_dir="/home/lc/Arxiv/141", verification_mode=VerificationMode.NO_CHECKS)
 print(all_data['train'][0])
 print(len(all_data['train']))
 
@@ -145,7 +152,7 @@ if True:
         # print("tmp_data:", tmp_data)
         for i in range(0, len(tmp_data['id'])):
             td = {}
-            td['_index'] = "paper_emb"
+            td['_index'] = "paper_title_emb"
             # td['_type'] = "doc"
             # td.append(0)
             td['_id'] = str(tmp_data['id'][i])
@@ -167,6 +174,9 @@ if True:
             ab_emb = model.encode([abstract])
             # print("ab_emb:", ab_emb)
             src['ab_emb'] = ab_emb[0]
+            title = str(tmp_data['title'][i])
+            title_emb = model.encode([title])
+            src['title_emb'] = title_emb[0]
             src['versions'] = str(tmp_data['versions'][i])
             src['update_date'] = str(tmp_data['update_date'][i])
             td["_source"] = src

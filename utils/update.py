@@ -130,7 +130,7 @@ if True:
         # print("tmp_data:", tmp_data)
         for i in range(0, len(tmp_data['id'])):
             td = {}
-            td['_index'] = "paper_emb"
+            td['_index'] = "paper_title_emb"
             # td['_type'] = "doc"
             # td.append(0)
             td['_id'] = str(tmp_data['id'][i])
@@ -152,6 +152,9 @@ if True:
             ab_emb = model.encode([abstract])
             # print("ab_emb:", ab_emb)
             src['ab_emb'] = ab_emb[0]
+            title = str(tmp_data['title'][i])
+            title_emb = model.encode([title])
+            src['title_emb'] = title_emb[0]
             src['versions'] = str(tmp_data['versions'][i])
             src['update_date'] = str(tmp_data['update_date'][i])
             td["_source"] = src

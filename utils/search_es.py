@@ -1,15 +1,7 @@
 # coding=utf-8
 
-# import json
-# import os
 import logging
-# from tqdm import tqdm
 from elasticsearch import Elasticsearch
-# from elasticsearch import helpers
-
-# from datasets import load_dataset
-# from datasets.utils.info_utils import VerificationMode
-
 from sentence_transformers import SentenceTransformer, util
 
 
@@ -17,7 +9,8 @@ logging.basicConfig(filename="es.log", level=logging.DEBUG)
 acc_token = "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"
 # sentences = ["This is an example sentence", "Each sentence is converted"]
 # sentences = ["如何增加大模型的处理窗口长度"]
-sentences = ["CODET: CODE GENERATION WITH GENERATED TESTS"]
+# sentences = ["CODET: CODE GENERATION WITH GENERATED TESTS"]
+sentences = ["auto generate prompt using gpt"]
 # sentences = ["Using the GPT large model to handle more complex tasks"]
 # sentences = ["How to Use Large Models to Process Longer Text"]
 # sentences = ["how to use the big gpt model to process diffcult problom"]
@@ -27,8 +20,6 @@ embeddings = model.encode(sentences)[0]
 # print("length of embeddings: {}, dims: {}".format(len(embeddings), len(embeddings[0])))
 # print("emb:", embeddings)
 
-def gen_emb():
-    return 
 
 cafile1 = "/etc/elasticsearch/certs/http_ca.crt"
 

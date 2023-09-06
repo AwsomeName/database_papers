@@ -131,8 +131,8 @@ doc = {
 # else:
 #     print("索引不存在")
 
-res = es.indices.create(index="paper_title_emb", body=doc)
-print(res)
+# res = es.indices.create(index="paper_title_emb", body=doc)
+# print(res)
 # exit()
     
 
@@ -147,6 +147,9 @@ if True:
     # for idx in tqdm(range(0, len(all_data['train']), step)):
     for idx in tqdm(range(0, len_a, step)):
         print("-----------", idx, len_a, idx / len_a)
+        
+        if idx <= 1227860:
+            continue
         datas = []
         tmp_data = all_data['train'][idx:idx+step]
         # print("tmp_data:", tmp_data)

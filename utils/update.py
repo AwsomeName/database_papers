@@ -19,8 +19,11 @@ from datetime import datetime
 from datasets import load_dataset
 from datasets.utils.info_utils import VerificationMode
 
-old_data = load_dataset("/home/lc/code/database_papers/arxiv_dataset", data_dir="/home/lc/Arxiv/", verification_mode=VerificationMode.NO_CHECKS)
-new_data = load_dataset("/home/lc/code/database_papers/arxiv_dataset", data_dir="/home/lc/Arxiv/141/", verification_mode=VerificationMode.NO_CHECKS)
+print("loading old data ...")
+old_data = load_dataset("/home/lc/code/database_papers/arxiv_dataset", data_dir="/home/lc/Arxiv/145/", verification_mode=VerificationMode.NO_CHECKS)
+print("load old data done, loading new data ...")
+new_data = load_dataset("/home/lc/code/database_papers/arxiv_dataset", data_dir="/home/lc/Arxiv/164/", verification_mode=VerificationMode.NO_CHECKS)
+print("loading old data ...")
 print(old_data['train'][0]['id'])
 # print(all_data['train'][0])
 # print(len(all_data['train']))
@@ -59,8 +62,10 @@ logging.basicConfig(filename="sql.log", level=logging.DEBUG)
 step = 10
 if True:
     for idx in tqdm(range(0, len(diff_data['train']), step)):
-        if idx <= 23077:
-            continue
+        # if idx <= 23077:
+        #     continue
+        if idx > 23077:
+            break
         datas = []
         tmp_data = diff_data['train'][idx:idx+step]
         # print("tmp_data:", tmp_data)

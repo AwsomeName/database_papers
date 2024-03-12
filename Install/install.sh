@@ -83,6 +83,9 @@ sudo service neo4j start
 vim /etc/neo4j/neo4j.conf
 ## 把 #dbms.connectors.default_listen_address=0.0.0.0 取消注释即可
 neo4j://localhost:7687 或7474
+# 如果忘记密码，
+# conf文件中，注释这一行，dbms.security.auth_enabled=false
+# 重启服务，浏览器中，ALTER USER neo4j SET PASSWORD 'newpwd'; 然后重新注释，重启服务。
 
 
 # 安装faiss
